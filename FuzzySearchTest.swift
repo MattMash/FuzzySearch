@@ -1,38 +1,35 @@
 /*
-The MIT License (MIT) - FuzzySearchTest.swift
-
-Copyright (c) 2015 Rahul Nadella https://github.com/rahulnadella
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.
-*/
+ The MIT License (MIT) - FuzzySearchTest.swift
+ Copyright (c) 2015 Rahul Nadella https://github.com/rahulnadella
+ Permission is hereby granted, free of charge, to any person obtaining a copy
+ of this software and associated documentation files (the "Software"), to deal
+ in the Software without restriction, including without limitation the rights
+ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ copies of the Software, and to permit persons to whom the Software is
+ furnished to do so, subject to the following conditions:
+ The above copyright notice and this permission notice shall be included in
+ all copies or substantial portions of the Software.
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ THE SOFTWARE.
+ */
 
 import Foundation
 import XCTest
+@testable import FuzzySearch
 
 /*
-The FuzzySearchTest is the test case for FuzzySearch
-*/
+ The FuzzySearchTest is the test case for FuzzySearch
+ */
 class FuzzySearchTest: XCTestCase
 {
     /*
-    Setup method for FuzzySearchTest
-    */
+     Setup method for FuzzySearchTest
+     */
     override func setUp()
     {
         super.setUp()
@@ -40,8 +37,8 @@ class FuzzySearchTest: XCTestCase
     }
     
     /*
-    TearDown method for FuzzySearchTest
-    */
+     TearDown method for FuzzySearchTest
+     */
     override func tearDown()
     {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
@@ -49,9 +46,9 @@ class FuzzySearchTest: XCTestCase
     }
     
     /*
-    The testFuzzySearch method tests the implementation of the FuzzySearch.search methods using case 
-    sensitive and insensitive Strings.
-    */
+     The testFuzzySearch method tests the implementation of the FuzzySearch.search methods using case
+     sensitive and insensitive Strings.
+     */
     func testFuzzySearch()
     {
         let helloWorld:String = "Hello World!"
@@ -69,8 +66,8 @@ class FuzzySearchTest: XCTestCase
     }
     
     /*
-    The testFuzzySearchCountWithoutCaseSensitive method tests the implementation of the FuzzySearch.search which returns count the number of characters which exist within the original character set
-    */
+     The testFuzzySearchCountWithoutCaseSensitive method tests the implementation of the FuzzySearch.search which returns count the number of characters which exist within the original character set
+     */
     func testFuzzySearchCountWithouCaseSensitive()
     {
         let countMessage = "si s S S s si"
@@ -81,13 +78,13 @@ class FuzzySearchTest: XCTestCase
     }
     
     /*
-    The testFuzzySearchWithCaseSensitive method tests the implementation of the FuzzySearch.search only using 
-    case sensitive Strings
-    */
+     The testFuzzySearchWithCaseSensitive method tests the implementation of the FuzzySearch.search only using
+     case sensitive Strings
+     */
     func testFuzzySearchWithCaseSensitive()
     {
         let message:String = "This document specifies an Internet standards track protocol"
-        let messageUppercase:String = message.uppercaseString
+        let messageUppercase:String = message.uppercased()
         
         XCTAssertTrue(FuzzySearch.search(originalString: message, stringToSearch: messageUppercase, isCaseSensitive: true), "Fuzzy Search (Case Sensitive) returns TRUE")
         XCTAssertFalse(FuzzySearch.search(originalString: message, stringToSearch: messageUppercase, isCaseSensitive: false), "Fuzzy Search (Case Sensitive) returns FALSE")
@@ -101,8 +98,8 @@ class FuzzySearchTest: XCTestCase
         XCTAssertFalse(FuzzySearch.search(originalString: message, stringToSearch: "RDS", isCaseSensitive: false), "Fuzzy Search (Case Sensitive) 'RDS' returns FALSE")
     }
     /*
-    The testFuzzySearchCount method tests the implementation of the FuzzySearch.search returning a the number of instances within the original String
-    */
+     The testFuzzySearchCount method tests the implementation of the FuzzySearch.search returning a the number of instances within the original String
+     */
     func testFuzzySearchCount()
     {
         let testMessage:String = "The The And"
@@ -112,12 +109,12 @@ class FuzzySearchTest: XCTestCase
         XCTAssertEqual(FuzzySearch.search(originalString: testMessage, stringToSearch: "T", isCaseSensitive: false), 2)
     }
     /*
-    The testFuzzySearchArray method tests the implementation of the FuzzySearch.search that returns an Array of Strings that match the character set being searched.
-    */
+     The testFuzzySearchArray method tests the implementation of the FuzzySearch.search that returns an Array of Strings that match the character set being searched.
+     */
     func testFuzzySearchArray()
     {
         let message:String = "This document specifies an Internet standards track protocol aN"
-        let messageUppercase:String = message.uppercaseString
+        let messageUppercase:String = message.uppercased()
         
         XCTAssertEqual(FuzzySearch.search(originalString: "", stringToSearch: "", isCaseSensitive: false), [String]())
         XCTAssertEqual(FuzzySearch.search(originalString: "", stringToSearch: message, isCaseSensitive: false), [String]())
@@ -127,74 +124,74 @@ class FuzzySearchTest: XCTestCase
         XCTAssertEqual(FuzzySearch.search(originalString: message, stringToSearch: "aN", isCaseSensitive: false), ["aN"])
     }
     /*
-    The testScore method tests the implementation of the score method returning the approximate matching score comparing to string arguments
-    */
+     The testScore method tests the implementation of the score method returning the approximate matching score comparing to string arguments
+     */
     func testScore()
     {
         let helloWorld:String = "hello world"
         
         XCTAssertEqual(FuzzySearch.score(originalString: helloWorld, stringToMatch: "axl"), 0.0)
-        XCTAssertEqualWithAccuracy(FuzzySearch.score(originalString: helloWorld, stringToMatch: "ow"), 0.504545454545455, accuracy: 0.00000001)
-        XCTAssertEqualWithAccuracy(FuzzySearch.score(originalString: helloWorld, stringToMatch: "e"), 0.259090909090909, accuracy: 0.00000001)
-        XCTAssertEqualWithAccuracy(FuzzySearch.score(originalString: helloWorld, stringToMatch: "h"), 0.586363636363636, accuracy: 0.00000001)
-        XCTAssertEqualWithAccuracy(FuzzySearch.score(originalString: helloWorld, stringToMatch: "he"), 0.622727272727273, accuracy: 0.00000001)
-        XCTAssertEqualWithAccuracy(FuzzySearch.score(originalString: helloWorld, stringToMatch: "hel"), 0.659090909090909, accuracy: 0.00000001)
-        XCTAssertEqualWithAccuracy(FuzzySearch.score(originalString: helloWorld, stringToMatch: "hell"), 0.695454545454545, accuracy: 0.00000001)
-        XCTAssertEqualWithAccuracy(FuzzySearch.score(originalString: helloWorld, stringToMatch: "hello"), 0.731818181818182, accuracy: 0.00000001)
-        XCTAssertEqualWithAccuracy(FuzzySearch.score(originalString: helloWorld, stringToMatch: "hello worl"), 0.913636363636364, accuracy: 0.00000001)
+        XCTAssertEqual(FuzzySearch.score(originalString: helloWorld, stringToMatch: "ow"), 0.504545454545455, accuracy: 0.00000001)
+        XCTAssertEqual(FuzzySearch.score(originalString: helloWorld, stringToMatch: "e"), 0.259090909090909, accuracy: 0.00000001)
+        XCTAssertEqual(FuzzySearch.score(originalString: helloWorld, stringToMatch: "h"), 0.586363636363636, accuracy: 0.00000001)
+        XCTAssertEqual(FuzzySearch.score(originalString: helloWorld, stringToMatch: "he"), 0.622727272727273, accuracy: 0.00000001)
+        XCTAssertEqual(FuzzySearch.score(originalString: helloWorld, stringToMatch: "hel"), 0.659090909090909, accuracy: 0.00000001)
+        XCTAssertEqual(FuzzySearch.score(originalString: helloWorld, stringToMatch: "hell"), 0.695454545454545, accuracy: 0.00000001)
+        XCTAssertEqual(FuzzySearch.score(originalString: helloWorld, stringToMatch: "hello"), 0.731818181818182, accuracy: 0.00000001)
+        XCTAssertEqual(FuzzySearch.score(originalString: helloWorld, stringToMatch: "hello worl"), 0.913636363636364, accuracy: 0.00000001)
         XCTAssertEqual(FuzzySearch.score(originalString: helloWorld, stringToMatch: "hello world"), 1.0)
         XCTAssertEqual(FuzzySearch.score(originalString: helloWorld, stringToMatch: "hello wor1"), 0.0)
-        XCTAssertEqualWithAccuracy(FuzzySearch.score(originalString: helloWorld, stringToMatch: "h"), 0.586363636363636, accuracy: 0.00000001)
-        XCTAssertEqualWithAccuracy(FuzzySearch.score(originalString: helloWorld, stringToMatch: "H"), 0.531818181818182, accuracy: 0.00000001)
+        XCTAssertEqual(FuzzySearch.score(originalString: helloWorld, stringToMatch: "h"), 0.586363636363636, accuracy: 0.00000001)
+        XCTAssertEqual(FuzzySearch.score(originalString: helloWorld, stringToMatch: "H"), 0.531818181818182, accuracy: 0.00000001)
         XCTAssertEqual(FuzzySearch.score(originalString: helloWorld, stringToMatch: "HiMi"), 0.0)
         XCTAssertEqual(FuzzySearch.score(originalString: helloWorld, stringToMatch: "Hills"), 0.0)
         XCTAssertEqual(FuzzySearch.score(originalString: helloWorld, stringToMatch: "Hillsd"), 0.0)
         
         let he:String = "He"
         
-        XCTAssertEqualWithAccuracy(FuzzySearch.score(originalString: he, stringToMatch: "h"), 0.675, accuracy: 0.00000001)
-        XCTAssertEqualWithAccuracy(FuzzySearch.score(originalString: he, stringToMatch: "H"), 0.75, accuracy: 0.00000001)
+        XCTAssertEqual(FuzzySearch.score(originalString: he, stringToMatch: "h"), 0.675, accuracy: 0.00000001)
+        XCTAssertEqual(FuzzySearch.score(originalString: he, stringToMatch: "H"), 0.75, accuracy: 0.00000001)
         
         let hello:String = "Hello"
         
-        XCTAssertEqualWithAccuracy(FuzzySearch.score(originalString: hello, stringToMatch: "hell"), 0.8475, accuracy: 0.01)
-        XCTAssertEqualWithAccuracy(FuzzySearch.score(originalString: hello, stringToMatch: "hello"), 0.93, accuracy: 0.01)
-        XCTAssertEqualWithAccuracy(FuzzySearch.score(originalString: hello, stringToMatch: "hello worl"), 0.0, accuracy: 0.00000001)
-        XCTAssertEqualWithAccuracy(FuzzySearch.score(originalString: hello, stringToMatch: "hello world"), 0.0, accuracy: 0.00000001)
-        XCTAssertEqualWithAccuracy(FuzzySearch.score(originalString: hello, stringToMatch: "hello wor1"), 0.0, accuracy: 0.00000001)
-
-        XCTAssertEqualWithAccuracy(FuzzySearch.score(originalString: helloWorld, stringToMatch: "hello worl", fuzziness:0.5), 0.913636363636364, accuracy: 0.00000001)
-        XCTAssertEqualWithAccuracy(FuzzySearch.score(originalString: helloWorld, stringToMatch: "hello world", fuzziness:0.5), 1.0, accuracy: 0.00000001)
-        XCTAssertEqualWithAccuracy(FuzzySearch.score(originalString: helloWorld, stringToMatch: "hello wor1", fuzziness:0.5), 0.608181818181818, accuracy: 0.00000001)
+        XCTAssertEqual(FuzzySearch.score(originalString: hello, stringToMatch: "hell"), 0.8475, accuracy: 0.01)
+        XCTAssertEqual(FuzzySearch.score(originalString: hello, stringToMatch: "hello"), 0.93, accuracy: 0.01)
+        XCTAssertEqual(FuzzySearch.score(originalString: hello, stringToMatch: "hello worl"), 0.0, accuracy: 0.00000001)
+        XCTAssertEqual(FuzzySearch.score(originalString: hello, stringToMatch: "hello world"), 0.0, accuracy: 0.00000001)
+        XCTAssertEqual(FuzzySearch.score(originalString: hello, stringToMatch: "hello wor1"), 0.0, accuracy: 0.00000001)
+        
+        XCTAssertEqual(FuzzySearch.score(originalString: helloWorld, stringToMatch: "hello worl", fuzziness:0.5), 0.913636363636364, accuracy: 0.00000001)
+        XCTAssertEqual(FuzzySearch.score(originalString: helloWorld, stringToMatch: "hello world", fuzziness:0.5), 1.0, accuracy: 0.00000001)
+        XCTAssertEqual(FuzzySearch.score(originalString: helloWorld, stringToMatch: "hello wor1", fuzziness:0.5), 0.608181818181818, accuracy: 0.00000001)
         
         let hillsdaleMichigan:String = "Hillsdale Michigan"
         
-        XCTAssertEqualWithAccuracy(FuzzySearch.score(originalString: hillsdaleMichigan, stringToMatch: "HiMi", fuzziness:0.5), 0.669444444444444, accuracy: 0.00000001)
-        XCTAssertEqualWithAccuracy(FuzzySearch.score(originalString: hillsdaleMichigan, stringToMatch: "Hills", fuzziness:0.5), 0.661111111111111, accuracy: 0.00000001)
-        XCTAssertEqualWithAccuracy(FuzzySearch.score(originalString: hillsdaleMichigan, stringToMatch: "Hillsd", fuzziness:0.5), 0.683333333333333, accuracy: 0.00000001)
+        XCTAssertEqual(FuzzySearch.score(originalString: hillsdaleMichigan, stringToMatch: "HiMi", fuzziness:0.5), 0.669444444444444, accuracy: 0.00000001)
+        XCTAssertEqual(FuzzySearch.score(originalString: hillsdaleMichigan, stringToMatch: "Hills", fuzziness:0.5), 0.661111111111111, accuracy: 0.00000001)
+        XCTAssertEqual(FuzzySearch.score(originalString: hillsdaleMichigan, stringToMatch: "Hillsd", fuzziness:0.5), 0.683333333333333, accuracy: 0.00000001)
     }
     
     /*
-    The testPerformanceExample tests the performance of FuzzySearch.search
-    */
+     The testPerformanceExample tests the performance of FuzzySearch.search
+     */
     func testPerformanceExample()
     {
         /* This is an example of a performance test case. */
-        self.measureBlock()
-        {
-            /* Test without case sensitive */
-            self.testFuzzySearch()
-            /* Test with case sensitive */
-            self.testFuzzySearchWithCaseSensitive()
-            /* Test count without case sensitive */
-            self.testFuzzySearchCountWithouCaseSensitive()
-            /* Test with count */
-            self.testFuzzySearchCount()
-            /* Test with array of Strings */
-            self.testFuzzySearchArray()
-            /* Test with fuzziness */
-            self.testScore()
+        self.measure()
+            {
+                /* Test without case sensitive */
+                self.testFuzzySearch()
+                /* Test with case sensitive */
+                self.testFuzzySearchWithCaseSensitive()
+                /* Test count without case sensitive */
+                self.testFuzzySearchCountWithouCaseSensitive()
+                /* Test with count */
+                self.testFuzzySearchCount()
+                /* Test with array of Strings */
+                self.testFuzzySearchArray()
+                /* Test with fuzziness */
+                self.testScore()
         }
     }
-
+    
 }
